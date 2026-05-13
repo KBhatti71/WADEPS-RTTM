@@ -112,7 +112,7 @@ summary:focus {
 }
 
 .site-header h1 {
-  color: #ffffff;
+  color: #fff;
 }
 
 .site-header__inner,
@@ -130,11 +130,10 @@ summary:focus {
 }
 
 .site-brand img {
-  width: min(220px, 40vw);
+  width: min(600px, 100vw);
   height: auto;
   background: var(--white);
   border-radius: 0.5rem;
-  padding: 0.35rem 0.5rem;
 }
 
 .site-brand__content {
