@@ -8,7 +8,7 @@
   --surface-strong: #edf2ec;
   --white: #ffffff;
   --link: #005ea8;
-  --focus: #4aff47;
+  --focus: #053704;
   --shadow: 0 10px 30px rgba(31, 37, 43, 0.08);
   --radius: 0.75rem;
   --container: 1100px;
@@ -91,6 +91,10 @@ summary:focus {
   color: var(--white);
   padding: var(--space-5) 0;
   border-bottom: 4px solid var(--focus);
+}
+
+.site-header h1 {
+  color: #ffffff;
 }
 
 .site-header__inner,
