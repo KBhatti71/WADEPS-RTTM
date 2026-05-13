@@ -7,7 +7,7 @@
 
 ## Summary
 
-This pass refactored the manual into a chapter-based training roadmap, tightened duplicate anchor and heading issues, and kept the web version focused on task-based navigation instead of a PDF-style index.
+This pass refactored the manual into a chapter-based training roadmap, tightened duplicate anchor and heading issues, and improved the visual hierarchy so the web version reads like a task-based training guide instead of a PDF-style index.
 
 ## What Changed
 
@@ -15,6 +15,8 @@ This pass refactored the manual into a chapter-based training roadmap, tightened
 - Added chapter-intro scaffolding so each major section starts with a training-focused summary and an "In This Chapter" learning box.
 - Added accessible reading tools with `Default`, `Large`, and `Extra Large` text-size buttons that save the visitor preference in `localStorage`.
 - Added a persistent `Back to Top` button that appears after scrolling, uses a real `button`, and returns users to the TOC heading.
+- Improved the TOC, chapter cards, and task blocks so chapters are easier to scan and section types such as `Scenario Practice`, `Common Mistakes`, and `Knowledge Check` are visually distinct without relying on color alone.
+- Added target highlighting and spacing improvements so chapter links, task links, and deep links are easier to follow after navigation.
 - Cleaned up duplicate IDs created during the PDF-to-web rebuild so every internal link now resolves to one unique target.
 - Renamed the Chapter 10 overview subsection to `CAD Data Overview` so `CAD Data Upload` points to the actual upload task.
 - Kept PDF page metadata visually secondary in the TOC. Current labels remain placeholders and still need final PDF page confirmation.

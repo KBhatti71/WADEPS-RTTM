@@ -7,6 +7,10 @@
   --surface: #f7f7f4;
   --surface-alt: #f1f4f1;
   --surface-strong: #edf2ec;
+  --info-surface: #eef5fb;
+  --scenario-surface: #fff8e8;
+  --warning-surface: #fcf2ec;
+  --success-surface: #eef6ef;
   --white: #ffffff;
   --link: #005ea8;
   --focus: #ffbf47;
@@ -39,6 +43,7 @@ body {
   line-height: var(--line-height);
   color: var(--text);
   background: var(--white);
+  overflow-wrap: anywhere;
 }
 
 body[data-text-size="default"] {
@@ -130,7 +135,7 @@ summary:focus {
 }
 
 .site-brand img {
-  width: min(600px, 100vw);
+  width: min(260px, 42vw);
   height: auto;
   background: var(--white);
   border-radius: 0.5rem;
@@ -163,6 +168,7 @@ summary:focus {
 .toc-card {
   background: var(--white);
   border: 1px solid var(--border);
+  border-top: 6px solid var(--wadeps-green);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: var(--space-4);
@@ -183,9 +189,13 @@ summary:focus {
 }
 
 .toc-intro {
-  max-width: none;
+  max-width: 72ch;
   color: var(--muted);
   margin-bottom: var(--space-3);
+  padding: var(--space-3);
+  background: var(--surface);
+  border-left: 4px solid var(--wadeps-green);
+  border-radius: 0.5rem;
 }
 
 .toc-list,
@@ -197,6 +207,7 @@ summary:focus {
 .toc-chapter {
   border-top: 1px solid var(--border);
   padding-top: var(--space-3);
+  padding-bottom: var(--space-2);
 }
 
 .toc-chapter:first-child {
@@ -213,27 +224,44 @@ summary:focus {
 }
 
 .toc-chapter-row > a {
-  font-size: 1.05rem;
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.3rem);
   font-weight: 700;
   color: var(--wadeps-green-dark);
 }
 
+.toc-chapter-row > a:hover {
+  color: var(--link);
+}
+
 .toc-page {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   white-space: nowrap;
+  font-weight: 700;
 }
 
 .toc-sublist {
   margin-top: 0.65rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--surface-strong);
 }
 
 .toc-sublist li + li {
   margin-top: 0.35rem;
 }
 
+.toc-sublist a {
+  display: inline-block;
+  color: var(--text);
+}
+
 .reading-tools {
-  padding: var(--space-4) 0;
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 .reading-tools h2 {
@@ -258,6 +286,12 @@ summary:focus {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.text-size-controls button:hover {
+  border-color: var(--wadeps-green);
+  background: var(--surface);
 }
 
 .text-size-controls button[aria-pressed="true"] {
@@ -269,7 +303,7 @@ summary:focus {
 .back-to-top {
   position: fixed;
   right: 1rem;
-  bottom: 1rem;
+  bottom: max(1rem, env(safe-area-inset-bottom));
   z-index: 1000;
   display: none;
   align-items: center;
@@ -362,7 +396,7 @@ summary:focus {
 
 .manual-chapter {
   margin: 0 0 var(--space-5);
-  padding: var(--space-4);
+  padding: clamp(1.25rem, 1rem + 0.8vw, 2rem);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: linear-gradient(180deg, var(--surface), var(--white));
@@ -371,6 +405,8 @@ summary:focus {
 
 .chapter-header {
   margin-bottom: var(--space-4);
+  display: grid;
+  gap: 0.75rem;
 }
 
 .chapter-header h2 {
@@ -381,6 +417,7 @@ summary:focus {
 .chapter-summary {
   max-width: 70ch;
   margin: 0;
+  font-size: 1.02em;
 }
 
 .chapter-learning-box {
@@ -406,6 +443,21 @@ summary:focus {
   visibility: hidden;
 }
 
+.manual-chapter,
+.manual-article,
+.task-section,
+h2,
+h3 {
+  scroll-margin-top: 1.5rem;
+}
+
+.manual-chapter:target,
+.manual-article:target,
+.task-section:target {
+  border-color: var(--wadeps-green);
+  box-shadow: 0 0 0 4px rgba(255, 191, 71, 0.35), var(--shadow);
+}
+
 .training-block,
 .scenario,
 .knowledge-check,
@@ -417,21 +469,75 @@ summary:focus {
   margin-bottom: var(--space-4);
 }
 
+.training-block h4,
+.scenario h4,
+.knowledge-check h4,
+.common-mistakes h4 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.purpose,
+.when-to-use,
+.before-you-begin,
+.steps,
+.quick-reference {
+  background: var(--info-surface);
+}
+
+.common-mistakes {
+  background: var(--warning-surface);
+  border-left: 6px solid #b35c1e;
+}
+
+.scenario {
+  background: var(--scenario-surface);
+  border-left: 6px solid #8a6d1d;
+}
+
+.knowledge-check {
+  background: var(--success-surface);
+  border-left: 6px solid var(--wadeps-green);
+}
+
+.steps ol,
+.quick-reference ol,
+.quick-reference ul {
+  margin-bottom: 0;
+}
+
 .knowledge-check fieldset {
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) - 0.2rem);
   padding: var(--space-3);
+  background: var(--white);
 }
 
 .knowledge-check label {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
   margin-top: 0.75rem;
+}
+
+.knowledge-check input[type="radio"],
+.knowledge-check input[type="checkbox"] {
+  margin-top: 0.2rem;
+  flex: 0 0 auto;
 }
 
 .manual-article {
   margin-top: var(--space-5);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--border);
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: 0 4px 16px rgba(31, 37, 43, 0.05);
+}
+
+.manual-article h3,
+.task-section h3 {
+  margin-top: 0;
 }
 
 .manual-figure {
@@ -516,6 +622,10 @@ p {
   margin-bottom: var(--space-3);
 }
 
+li {
+  max-width: 72ch;
+}
+
 .site-footer {
   background: var(--wadeps-green-dark);
   color: var(--white);
@@ -565,6 +675,10 @@ p {
   .manual-chapter {
     padding: var(--space-3);
   }
+
+  .manual-article {
+    padding: var(--space-3);
+  }
 }
 
 @media print {
@@ -607,7 +721,7 @@ p {
 
   .back-to-top {
     right: 0.75rem;
-    bottom: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
     padding: 0.6rem 0.75rem;
   }
 
