@@ -99,6 +99,11 @@ a:hover {
   text-decoration-thickness: 0.12em;
 }
 
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
 a:focus,
 button:focus,
 input:focus,
@@ -106,7 +111,7 @@ select:focus,
 textarea:focus,
 summary:focus {
   outline: 3px solid var(--focus);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 .site-header {
@@ -526,13 +531,21 @@ h3 {
   flex: 0 0 auto;
 }
 
-.manual-article {
+.stages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
   margin-top: var(--space-5);
+}
+
+.manual-article {
+  margin-top: 0;
   padding: var(--space-4);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--white);
   box-shadow: 0 4px 16px rgba(31, 37, 43, 0.05);
+  height: 100%;
 }
 
 .manual-article h3,
@@ -653,6 +666,11 @@ li {
   .manual-cover {
     grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
     align-items: start;
+  }
+
+  .stages-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
   }
 }
 
