@@ -1,50 +1,63 @@
 # WCAG 2.2 Checklist - WADEPS Reporting Tool Training Manual
 
 **Date:** May 13, 2026  
-**File:** `WADEP-TM.html`  
-**Stylesheet:** `styles.css`
+**HTML:** `C:\Users\arab2\Downloads\WADEPS_PDF-HTML\WADEP-TM.html`  
+**CSS:** `C:\Users\arab2\Downloads\WADEPS_PDF-HTML\styles.css`  
+**JavaScript:** `C:\Users\arab2\Downloads\WADEPS_PDF-HTML\manual.js`
 
 ## Summary
 
-This pass re-checked the heading hierarchy against the PDF's major reading order, tightened chapter-level structure, and aligned both the table of contents and body headings to the same chapter flow.
+This pass refactored the manual into a chapter-based training roadmap, tightened duplicate anchor and heading issues, and kept the web version focused on task-based navigation instead of a PDF-style index.
 
 ## What Changed
 
-- Re-ran the heading audit and corrected chapter/subsection levels where the previous pass was too flat.
-- Kept the manual's high-level sequence aligned to the PDF: introduction, courses, login/setup, portal overview, reportable uses of force, reporting workflow, CAD guidance, and FAQs.
-- Reworked the "3 Stages" section into explicit stage headings for Initial Data Entry, Supervisor Review, and Administrative Follow-Up.
-- Converted the table of contents into chapter navigation with nested subsection links instead of listing every "Important" note as a top-level item.
-- Updated the body `h2` headings so the visible content flow now uses the same chapter naming pattern as the table of contents.
-- Preserved the semantic landmarks, skip link, responsive layout, and figure accessibility from the earlier rebuild.
+- Rebuilt the table of contents as a semantic chapter roadmap with nested ordered lists and descriptive internal links.
+- Added chapter-intro scaffolding so each major section starts with a training-focused summary and an "In This Chapter" learning box.
+- Added accessible reading tools with `Default`, `Large`, and `Extra Large` text-size buttons that save the visitor preference in `localStorage`.
+- Added a persistent `Back to Top` button that appears after scrolling, uses a real `button`, and returns users to the TOC heading.
+- Cleaned up duplicate IDs created during the PDF-to-web rebuild so every internal link now resolves to one unique target.
+- Renamed the Chapter 10 overview subsection to `CAD Data Overview` so `CAD Data Upload` points to the actual upload task.
+- Kept PDF page metadata visually secondary in the TOC. Current labels remain placeholders and still need final PDF page confirmation.
+- Preserved the skip link, responsive layout, focus styling, print rules, and landmark structure.
 
 ## WCAG 2.2 Checklist
 
 | Check | Status | Notes |
 |---|---|---|
 | One `h1` only | PASS | Single page title retained. |
-| Landmark structure | PASS | `header`, `nav`, `main`, `section`, `article`, and `footer` remain in place. |
+| Chapter headings use `h2` | PASS | Chapter sections are introduced with `h2` headings. |
+| Task headings use `h3` | PASS | Major task sections remain at `h3`. |
+| No heading-level skips | PASS | Local structure audit found `0` heading skips. |
+| Landmark structure | PASS | `header`, `nav`, `main`, `section`, and `footer` are present. |
 | Skip link present | PASS | First focusable element links to `#main-content`. |
-| Heading order | PASS | Structural heading-level skips were removed in the local audit. |
-| PDF reading order preserved | PASS | Chapter order now follows the manual's PDF-style sequence. |
-| Chapter-based table of contents | PASS | TOC now groups content into chapters with nested section links. |
-| Chapter-based body flow | PASS | Primary content headings now mirror the same chapter sequence used in the TOC. |
-| Positive `tabindex` removed | PASS | No positive `tabindex` values found. |
-| Empty links or buttons | PASS | No empty links found in local checks. |
-| Clickable `div` controls | PASS | None found. |
-| Missing `alt` attributes | PASS | No missing `alt` attributes found on images. |
-| Inline styles removed | PASS | Styles are in `styles.css`. |
-| Responsive layout | PASS | Fluid container and mobile-safe layout remain in place. |
-| Horizontal page scrolling | PASS | No page-level horizontal scrolling introduced. |
-| Link purpose clarity | PASS | TOC links are now shorter and more descriptive. |
-| Focus visibility | PASS | Shared high-contrast focus styling remains in place. |
-| WAVE / axe automated scan | NEEDS REVIEW | Not run from this terminal-only pass. |
-| Lighthouse accessibility audit | NEEDS REVIEW | Not run from this terminal-only pass. |
-| Manual screen reader test | NEEDS REVIEW | Still recommended before publishing. |
+| TOC uses semantic `nav` | PASS | TOC is a labeled `nav` with nested ordered lists. |
+| TOC links resolve to real IDs | PASS | Local audit found `0` missing internal targets. |
+| Duplicate IDs removed | PASS | Local audit found `0` duplicate IDs. |
+| Positive `tabindex` removed | PASS | Local audit found `0` positive `tabindex` values. |
+| Empty links removed | PASS | Local audit found `0` empty links. |
+| Missing `alt` attributes | PASS | Local audit found `0` missing `alt` attributes. |
+| Generic "click here" links | PASS | Local audit found `0` generic "click here" links. |
+| Reading tools use real buttons | PASS | Buttons use `aria-pressed` and work with keyboard or pointer input. |
+| Text-size preference persists | PASS | `manual.js` stores the selection in `localStorage`. |
+| Back to Top button appears after scrolling | PASS | Button becomes visible after the page is scrolled more than 400 pixels. |
+| Back to Top button works with keyboard and mouse | PASS | Uses a real `button` element with a click handler. |
+| Back to Top button has an accessible name | PASS | Button uses `aria-label="Back to top"` and visible text. |
+| Back to Top respects reduced motion | PASS | Smooth scrolling falls back to auto when `prefers-reduced-motion` is enabled. |
+| Back to Top hidden in print | PASS | Print CSS hides the control. |
+| Focus visibility | PASS | Shared high-contrast focus styles remain in place. |
+| Mobile TOC readability | PASS | TOC stacks without horizontal scrolling in the current CSS structure. |
+| Print support | PASS | Print CSS keeps the TOC readable and hides interactive controls. |
+| PDF page labels finalized | NEEDS REVIEW | TOC still shows placeholder page metadata pending PDF confirmation. |
+| 200% zoom manual check | NEEDS REVIEW | Not manually verified in a browser during this pass. |
+| 320px viewport manual check | NEEDS REVIEW | Not manually verified in a browser during this pass. |
+| Keyboard-only walkthrough | NEEDS REVIEW | Structural checks passed, but browser testing is still recommended. |
+| Axe / WAVE / Lighthouse scan | NEEDS REVIEW | Not run from this terminal-only pass. |
+| Screen reader review | NEEDS REVIEW | NVDA, JAWS, or VoiceOver review is still recommended. |
 
 ## Recommended Final Validation
 
-1. Run keyboard-only navigation from skip link through the full TOC and chapter content.
-2. Review at 200% zoom.
-3. Review at 320px width.
-4. Run axe, WAVE, and Lighthouse in a browser.
-5. Do a manual heading-outline and screen-reader pass in NVDA, JAWS, or VoiceOver.
+1. Confirm the final PDF page numbers and replace the current placeholder TOC metadata.
+2. Run a keyboard-only pass from the skip link through the TOC, reading tools, and all chapter links.
+3. Review the page at 200% zoom and at a `320px` mobile viewport.
+4. Run Axe, WAVE, and Lighthouse in a browser.
+5. Do a manual screen-reader pass to confirm chapter flow, reading order, and knowledge-check usability.
