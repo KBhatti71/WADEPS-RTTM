@@ -257,6 +257,17 @@ This remediation pass prioritized the semantic heading outline first, then tight
     - What if the under-investigation status is not known at the time of reporting, or an investigation starts days or weeks after the use-of-force event
       - Remember there are two processes:
 
+## Audit Pass 2 — May 14, 2026
+
+### What Changed
+
+- Removed 11 `<span class="toc-page">PDF page reference pending confirmation</span>` placeholder elements from the TOC. These were incomplete migration markers from the source PDF with no confirmed page numbers. The TOC intro text was updated to remove the reference to PDF page numbers.
+- Removed the now-orphaned `.toc-page` CSS rule (main and print media query) from `styles.css`.
+- Fixed `h4` visual styling: bumped `font-size` from `1rem` to `1.05rem` and added explicit `font-weight: 700` so H4 headings are visually distinct from body text.
+- Verified color contrast for borderline values: `.eyebrow` (`#4b5563` on white, ~5.9:1, PASS); `.site-subtitle` (`rgba(255,255,255,0.92)` on `#1f4f3a`, >14:1, PASS).
+- Verified `manual.js` (57 lines): `aria-pressed` syncs correctly on all text-size buttons; back-to-top uses CSS class toggle with no focus interference; reduced-motion respected for scroll behavior. No changes needed.
+- Confirmed the single `grep` match for `anchor-target` is a false positive inside base64 image data — no actual `.anchor-target` elements exist in the document.
+
 ## WCAG 2.2 AA Checklist
 
 | Check | Status | Notes |
@@ -264,7 +275,7 @@ This remediation pass prioritized the semantic heading outline first, then tight
 | One `h1` only | PASS | Local audit found `1` page title heading. |
 | Chapter headings use `h2` | PASS | Major manual chapters remain at `h2`. |
 | Task headings use `h3` | PASS | Major task sections remain at `h3`. |
-| Instructional blocks use `h4` | FIXED | Repeated PDF-style instructional labels were demoted to `h4`. |
+| Instructional blocks use `h4` | FIXED | Repeated PDF-style instructional labels were demoted to `h4`; H4 now has distinct `font-size: 1.05rem` and explicit `font-weight: 700`. |
 | No heading-level skips | PASS | Local audit found `0` heading skips. |
 | Landmark structure | PASS | Local audit found `1` `main`, `1` `nav`, and `1` `footer`. |
 | Skip link present | PASS | First focusable element links to `#main-content`. |
