@@ -538,6 +538,18 @@ h3 {
   margin-top: var(--space-5);
 }
 
+.stages-grid > section {
+  background: var(--white);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  border-top: 5px solid var(--wadeps-green-dark);
+  box-shadow: 0 4px 16px rgba(31, 37, 43, 0.1), 0 1px 4px rgba(31, 37, 43, 0.06);
+}
+
+.stages-grid > section > h3:first-child {
+  margin-top: 0;
+}
+
 .manual-article {
   margin-top: 0;
   padding: var(--space-4);

@@ -436,6 +436,100 @@ If used, the back-to-top button should be simple and accessible.
   outline-offset: 2px;
 }
 ```
+## Reusable Content Patterns
+
+### Definition Cards
+
+Use definition cards for repeated term-and-definition content throughout the WADEPS Reporting Tool Training Manual.
+
+Definition cards are required when the manual lists a term followed by a bold “Definition:” label, especially in sections such as Contact Reason, Response Type, Location options, Initial Incident Type, Indoor Location, Outdoor Location, and other repeated data-entry option lists.
+
+Do not convert repeated definitions into accordions or dropdowns. Definitions must remain visible by default because users need to compare options quickly while using the training manual.
+
+Definition cards must preserve the original manual wording and content order. Do not rewrite, simplify, summarize, or reinterpret the training manual content unless explicitly asked. The source PDF/Word manual remains the authoritative reference.
+
+Each definition card should include:
+
+* A prominent term title, such as “Public Request for Service”
+* The original definition text
+* A bold “Definition:” label
+* A dark WADEPS green left border only
+* A light neutral/off-white background
+* Clear spacing and readable line height
+* Accessible semantic HTML
+* Mobile-friendly layout
+
+For sections that include both “Definition:” and “Legal Implication:”, keep both labels bold inside the same definition card.
+
+Example structure:
+
+```html
+<section class="definition-group" aria-labelledby="contact-reason-heading">
+  <h3 id="contact-reason-heading">Contact Reason</h3>
+  <p>Select one of four reasons for the initial contact that led to the use of force event.</p>
+
+  <div class="definition-card">
+    <h4 class="definition-card__term">Public Request for Service</h4>
+    <p class="definition-card__body"><strong>Definition:</strong> The contact originated from a member of the public requesting assistance or reporting an incident (typically by phone or in-person).</p>
+  </div>
+</section>
+```
+
+Recommended CSS:
+
+```css
+.definition-group {
+  margin: 2rem 0;
+}
+
+.definition-card {
+  border-left: 6px solid var(--wadeps-green-dark, #1f4f3a);
+  background: var(--wadeps-surface-light, #f7f7f4);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.definition-card__term {
+  color: var(--wadeps-green-dark, #1f4f3a);
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.definition-card p {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.definition-card p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .definition-card {
+    padding: 0.875rem 1rem;
+    border-left-width: 5px;
+  }
+}
+```
+
+Accessibility requirements:
+
+* Keep all definitions visible by default.
+* Do not use dropdowns or accordions for repeated definitions.
+* Do not skip heading levels.
+* Match the term heading level to the surrounding page hierarchy.
+* Do not use headings only for visual styling.
+* Maintain WCAG 2.2 AA color contrast.
+* Ensure the layout works at 320px mobile width.
+* Do not remove existing alt text, captions, headings, IDs, anchors, or navigation structure.
+
+Definition cards are separate from callout boxes. Continue using callout boxes for “Important,” “Reminder,” “Example,” “Troubleshooting Tip,” “Guidance for Verification,” and “Need Help?” content.
+
+
+```
 
 The button must not cover important content.
 
