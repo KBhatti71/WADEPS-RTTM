@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "name": "Full WADEPS Manual Review",
+  "description": "Manual review hook for checking WADEPS training manual accessibility, heading structure, callouts, image text, captions, and WordPress readiness without changing approved manual wording.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "{\n  \"name\": \"Run Full WADEPS Manual Review\",\n  \"description\": \"Manual hook to review WADEPS training manual files for accessibility, heading structure, callouts, image text, and WordPress readiness.\",\n  \"version\": \"1\",\n  \"when\": {\n    \"type\": \"userTriggered\"\n  },\n  \"then\": {\n    \"type\": \"askAgent\",\n    \"prompt\": \"Run a full WADEPS training manual review. Check accessibility, semantic headings, callout styling, WordPress import readiness, image alt text, captions, lists, tables, keyboard accessibility, focus states, and content drift. Do not rewrite the approved manual wording. Provide a clear checklist of issues found, the file/location, severity, and the minimal recommended fix.\"\n  }\n}\n\nRun a full WADEPS training manual review.\n\nReview the current WADEPS files for accessibility, semantic structure, WordPress-readiness, and formatting consistency.\n\nImportant rules:\n- Do not rewrite, paraphrase, summarize, shorten, or change the approved WADEPS training manual wording.\n- The goal is to convert the approved accessible PDF/Word manual into a readable, digitally accessible website.\n- Preserve the manual’s existing instructional language, section order, screenshots, captions, and meaning.\n- Only recommend or make minimal technical fixes related to accessibility, structure, formatting, or WordPress compatibility.\n\nCheck for:\n1. WCAG 2.2 accessibility issues\n2. Correct semantic heading order\n3. Missing or skipped heading levels\n4. Proper list structure\n5. Accessible tables\n6. Descriptive link text\n7. Images with alt text and captions\n8. Callout blocks such as Important, Note, Reminder, Troubleshooting Tip, Example, Need Help, and Guidance for Verification\n9. Callouts should use a dark green left border only\n10. WordPress-safe HTML with no DOCTYPE, html, head, body, meta, or title tags\n11. No custom Nexter/WADEPS heading blocks\n12. Stock WordPress-compatible headings, paragraphs, lists, images, tables, groups, and custom HTML blocks\n13. No unauthorized content drift from the approved manual\n\nOutput the review as:\n- Issue\n- Location or file\n- Severity: High, Medium, or Low\n- Why it matters\n- Minimal recommended fix\n\nIf no issue is found in a category, say “No issue found.”"
+  },
+  "workspaceFolderName": "WADEPS-RTTM-main",
+  "shortName": "full-wadeps-manual-review"
+}

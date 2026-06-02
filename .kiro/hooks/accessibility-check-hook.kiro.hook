@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "name": "Accessibility check hook",
+  "description": "Use this when HTML, CSS, Markdown, or WordPress-ready content changes.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "{\n  \"name\": \"WADEPS Accessibility Check\",\n  \"description\": \"Checks WADEPS training manual files for WCAG 2.2 accessibility issues without rewriting training content.\",\n  \"version\": \"1\",\n  \"when\": {\n    \"type\": \"fileEdited\",\n    \"patterns\": [\n      \"**/*.html\",\n      \"**/*.css\",\n      \"**/*.md\",\n      \"**/*.tsx\",\n      \"**/*.jsx\",\n      \"!**/node_modules/**\",\n      \"!**/dist/**\",\n      \"!**/build/**\"\n    ]\n  },\n  \"then\": {\n    \"type\": \"askAgent\",\n    \"prompt\": \"Review the edited WADEPS file for WCAG 2.2 accessibility issues. Do not rewrite or simplify the WADEPS training manual wording. Only identify and fix structural or technical accessibility issues. Check for: semantic HTML landmarks, heading order, descriptive link text, accessible images, alt text, captions, keyboard focus visibility, color contrast, accessible tables, lists, buttons, skip links, and ARIA only when necessary. Preserve the original WADEPS manual language, section order, screenshots, captions, and public-sector tone. If changes are needed, explain them briefly and apply only minimal accessibility-focused edits.\"\n  }\n}"
+  }
+}

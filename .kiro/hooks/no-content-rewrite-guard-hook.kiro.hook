@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "name": "No content rewrite guard hook",
+  "description": "This is the most important one for protecting your training manual wording.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "{\n  \"name\": \"WADEPS No Content Rewrite Guard\",\n  \"description\": \"Prevents the agent from changing approved WADEPS training manual wording unless explicitly asked.\",\n  \"version\": \"1\",\n  \"when\": {\n    \"type\": \"fileEdited\",\n    \"patterns\": [\n      \"**/*.html\",\n      \"**/*.md\",\n      \"**/*.txt\",\n      \"!**/node_modules/**\",\n      \"!**/dist/**\",\n      \"!**/build/**\"\n    ]\n  },\n  \"then\": {\n    \"type\": \"askAgent\",\n    \"prompt\": \"Compare the edited WADEPS manual content against the project goal: converting the approved accessible PDF/manual into a readable, digitally accessible site. Do not rewrite, paraphrase, summarize, modernize, shorten, or change the instructional wording unless the user explicitly asks for content editing. Your job is to preserve the approved manual wording and only check for formatting, semantic structure, accessibility, WordPress-readiness, broken markup, missing alt/caption structure, and styling consistency. If you find wording changes, flag them as potential unauthorized content drift and recommend restoring the original manual language.\"\n  }\n}"
+  }
+}

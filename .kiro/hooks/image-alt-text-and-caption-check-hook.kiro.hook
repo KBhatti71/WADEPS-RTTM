@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "name": "Image alt text and caption check hook",
+  "description": "This protects your screenshot accessibility work.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "{\n  \"name\": \"WADEPS Image Alt Text and Caption Check\",\n  \"description\": \"Checks that WADEPS screenshots and images include useful alt text and captions.\",\n  \"version\": \"1\",\n  \"when\": {\n    \"type\": \"fileEdited\",\n    \"patterns\": [\n      \"**/*.html\",\n      \"**/*.md\",\n      \"**/*.tsx\",\n      \"**/*.jsx\",\n      \"!**/node_modules/**\",\n      \"!**/dist/**\",\n      \"!**/build/**\"\n    ]\n  },\n  \"then\": {\n    \"type\": \"askAgent\",\n    \"prompt\": \"Review all images in the edited WADEPS file. Ensure meaningful screenshots have descriptive alt text and captions when needed. Alt text should explain the purpose of the screenshot, not every visual detail. Captions should support the training task and identify what the user is looking at. Decorative images should use empty alt text. Do not invent content that is not visible or supported. Preserve existing approved alt text and captions unless they are missing, inaccurate, too vague, or not aligned with WCAG 2.2. Flag missing alt attributes, duplicate alt text, captions used as replacement for alt text, and images that need nearby explanatory text.\"\n  }\n}"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "name": "Callout style check hook",
+  "description": "This directly matches what you asked for: Troubleshooting Tip, Important, Guidance for Verification, Reminder, Note, Example, Need Help should have a dark green left border only.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "{\n  \"name\": \"WADEPS Callout Style Check\",\n  \"description\": \"Ensures WADEPS callout blocks use the correct accessible dark green left-border style.\",\n  \"version\": \"1\",\n  \"when\": {\n    \"type\": \"fileEdited\",\n    \"patterns\": [\n      \"**/*.html\",\n      \"**/*.css\",\n      \"**/*.md\",\n      \"!**/node_modules/**\",\n      \"!**/dist/**\",\n      \"!**/build/**\"\n    ]\n  },\n  \"then\": {\n    \"type\": \"askAgent\",\n    \"prompt\": \"Review WADEPS callout blocks in the edited file. Callouts include: Important, Important Note, Troubleshooting Tip, Guidance for Verification, Reminder, Note, Example, Need Help, Next Step, Status, Decision, and Done. Keep the callout text exactly as written unless there is a clear typo. Ensure the callout uses a simple accessible style: white or very light background, dark green left border only, readable dark text, adequate padding, no decorative icons required, and no border on all four sides unless already approved. Use WADEPS dark green branding. Do not change the meaning, order, or instructional wording of the manual.\"\n  }\n}\n.wadeps-callout,\n.callout,\n.wp-block-group.is-style-wadeps-callout {\n  border-left: 8px solid #1f4f3a;\n  border-top: 0;\n  border-right: 0;\n  border-bottom: 0;\n  background: #ffffff;\n  padding: 1rem 1.25rem;\n  margin: 1.5rem 0;\n  color: #1f252b;\n}\n\n.wadeps-callout__title,\n.callout-title {\n  color: #1f252b;\n  font-weight: 700;\n  margin-top: 0;\n}"
+  }
+}

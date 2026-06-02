@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "name": "WordPress readiness hook",
+  "description": "This keeps Kiro from producing full-page HTML that breaks WordPress page hierarchy.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "{\n  \"name\": \"WADEPS WordPress Readiness Check\",\n  \"description\": \"Prepares WADEPS HTML output for safe WordPress import without breaking page titles or hierarchy.\",\n  \"version\": \"1\",\n  \"when\": {\n    \"type\": \"fileEdited\",\n    \"patterns\": [\n      \"**/*.html\",\n      \"**/*.md\",\n      \"!**/node_modules/**\",\n      \"!**/dist/**\",\n      \"!**/build/**\"\n    ]\n  },\n  \"then\": {\n    \"type\": \"askAgent\",\n    \"prompt\": \"Review the edited WADEPS content for WordPress import readiness. Do not rewrite the manual wording. If HTML is intended for WordPress, remove or flag DOCTYPE, html, head, body, meta, title, and global document wrapper tags. WordPress should receive body content only. Preserve headings, paragraphs, lists, images, captions, alt text, callouts, and table structure. Use standard WordPress-compatible semantic HTML. Avoid custom Nexter/WADEPS heading blocks. Prefer stock WordPress heading, paragraph, image, list, table, group, and custom HTML blocks. Ensure the output will not override the WordPress page title or break nested page hierarchy.\"\n  }\n}"
+  }
+}
