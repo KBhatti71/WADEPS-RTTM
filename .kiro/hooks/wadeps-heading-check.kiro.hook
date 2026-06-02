@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "WADEPS Heading Structure Check",
+  "description": "Checks that WADEPS manual headings follow a logical semantic order and match the manual structure.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*.html"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review heading structure in the edited WADEPS training manual content. The goal is to preserve the PDF/manual structure while making the web version accessible and easy to scan. Do not rewrite body content. Check that there is one clear H1 for the page or chapter, followed by logical H2, H3, H4, H5, and H6 nesting where needed. Do not promote or demote headings for visual style only. Flag skipped heading levels unless they intentionally reflect the source manual structure. Replace visual-only heading styling with semantic heading elements. If a heading is being used only for visual emphasis, recommend a paragraph, strong text, or callout label instead."
+  }
+}

@@ -1,0 +1,1153 @@
+/* ============================================================
+   WADEPS Training Manual — WordPress-Safe Stylesheet
+   ============================================================
+   
+   How to use in WordPress:
+   
+   Option A: Add via theme functions.php
+   -----------------------------------------------
+   function wadeps_enqueue_manual_styles() {
+     wp_enqueue_style(
+       'wadeps-training-manual',
+       get_stylesheet_directory_uri() . '/css/wadeps-training-manual-wp.css',
+       array(),
+       '2.4'
+     );
+   }
+   add_action('wp_enqueue_scripts', 'wadeps_enqueue_manual_styles');
+   
+   Option B: Paste into Appearance > Customize > Additional CSS
+   -----------------------------------------------
+   Copy the contents below directly.
+   
+   Option C: Add via a child theme stylesheet
+   -----------------------------------------------
+   @import url('wadeps-training-manual-wp.css');
+   
+   IMPORTANT:
+   - This stylesheet is scoped to .wadeps-manual (the training manual
+     content wrapper) so it will not interfere with the rest of the
+     WordPress site.
+   - WordPress provides its own box-sizing, body font, and resets.
+     This file does NOT include global resets.
+   - The :root custom properties are safe to include globally since
+     they only define values and do not change any element styling
+     until used inside scoped selectors.
+   ============================================================ */
+
+/* ============================================================
+   1. CUSTOM PROPERTIES (safe globally — no visual side effects)
+   ============================================================ */
+
+:root {
+  /* WADEPS greens */
+  --wadeps-green: #1f4f3a;
+  --wadeps-green-dark: #1B5027;
+  --wadeps-green-muted: #2f6f4e;
+  --wadeps-green-light: #dcefe3;
+
+  /* Text */
+  --wadeps-text: #1f252b;
+  --wadeps-muted: #555f5b;
+  --wadeps-heading: #1B5027;
+
+  /* Surfaces */
+  --wadeps-white: #ffffff;
+  --wadeps-surface: #f7f7f4;
+  --wadeps-surface-alt: #f3f7f4;
+  --wadeps-surface-strong: #edf2ec;
+  --wadeps-info-surface: #eef5fb;
+  --wadeps-scenario-surface: #fff8e8;
+  --wadeps-warning-surface: #fcf2ec;
+  --wadeps-success-surface: #eef6ef;
+
+  /* Borders */
+  --wadeps-border: #cfd8d1;
+  --wadeps-border-strong: #1B5027;
+
+  /* Links */
+  --wadeps-link: #1B5027;
+  --wadeps-link-hover: #12391c;
+
+  /* Focus */
+  --wadeps-focus: #1f4f3a;
+
+  /* Layout */
+  --wadeps-shadow: 0 10px 30px rgba(31, 37, 43, 0.08);
+  --wadeps-radius: 0.75rem;
+  --wadeps-container: 1100px;
+}
+
+
+/* ============================================================
+   2. TRAINING MANUAL CONTENT WRAPPER
+   ============================================================
+   Wrap the entire training manual body content in a container
+   with class="wadeps-manual". Example:
+   
+   <div class="wadeps-manual">
+     ...all manual content here...
+   </div>
+   ============================================================ */
+
+.wadeps-manual {
+  font-family: Montserrat, "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--wadeps-text);
+  overflow-wrap: break-word;
+}
+
+/* Container utility — used for header, footer, and full-width sections */
+.wadeps-manual .container {
+  width: min(100% - 2rem, var(--wadeps-container));
+  margin: 0 auto;
+}
+
+/* Training manual main content — 900px centered content area */
+.wadeps-manual .training-manual {
+  max-width: 900px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+/* Text size variants — toggled via JS data attribute or class */
+.wadeps-manual .training-manual.text-size-large,
+.wadeps-manual.text-size-large {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.wadeps-manual .training-manual.text-size-xl,
+.wadeps-manual.text-size-xl {
+  font-size: 1.25rem;
+  line-height: 1.75;
+}
+
+/* Readable line length for text */
+.wadeps-manual p,
+.wadeps-manual li {
+  max-width: 75ch;
+}
+
+/* Full-width elements use all available space within the 900px wrapper */
+.wadeps-manual table,
+.wadeps-manual figure,
+.wadeps-manual .wadeps-callout,
+.wadeps-manual .definition-card,
+.wadeps-manual .toc-card,
+.wadeps-manual .toc-grid,
+.wadeps-manual .stages-grid,
+.wadeps-manual .manual-cover {
+  max-width: 100%;
+}
+
+.wadeps-manual img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wadeps-manual table {
+  width: 100%;
+}
+
+
+/* ============================================================
+   3. HEADINGS
+   ============================================================ */
+
+.wadeps-manual h1,
+.wadeps-manual h2,
+.wadeps-manual h3,
+.wadeps-manual h4,
+.wadeps-manual h5,
+.wadeps-manual h6 {
+  color: var(--wadeps-heading);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.wadeps-manual h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.wadeps-manual h2 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  line-height: 1.2;
+  margin-top: 1.75rem;
+  margin-bottom: 0.875rem;
+}
+
+.wadeps-manual h3 {
+  font-size: clamp(1.2rem, 3vw, 1.75rem);
+  line-height: 1.25;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.wadeps-manual h4,
+.wadeps-manual h5,
+.wadeps-manual h6 {
+  font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+  line-height: 1.3;
+  margin-top: 1.25rem;
+  margin-bottom: 0.625rem;
+}
+
+
+/* ============================================================
+   4. LINKS
+   ============================================================ */
+
+.wadeps-manual a {
+  color: var(--wadeps-link);
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+  text-decoration-thickness: 0.08em;
+}
+
+.wadeps-manual a:hover {
+  color: var(--wadeps-link-hover);
+  text-decoration-thickness: 0.12em;
+}
+
+
+/* ============================================================
+   5. FOCUS STATES
+   ============================================================ */
+
+.wadeps-manual a:focus-visible,
+.wadeps-manual button:focus-visible,
+.wadeps-manual summary:focus-visible,
+.wadeps-manual [tabindex]:focus-visible {
+  outline: 3px solid var(--wadeps-focus);
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+   6. PARAGRAPHS, LISTS, SPACING
+   ============================================================ */
+
+.wadeps-manual p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.wadeps-manual ul,
+.wadeps-manual ol {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  padding-inline-start: 1.5em;
+}
+
+.wadeps-manual li + li {
+  margin-top: 0.35em;
+}
+
+
+/* ============================================================
+   7. SITE HEADER (if included in WordPress template)
+   ============================================================ */
+
+.wadeps-manual .site-header {
+  background: linear-gradient(135deg, var(--wadeps-green-dark), var(--wadeps-green));
+  color: var(--wadeps-white);
+  padding: 2rem 0;
+  border-bottom: 4px solid var(--wadeps-focus);
+}
+
+.wadeps-manual .site-header h1 {
+  color: #fff;
+}
+
+.wadeps-manual .site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.wadeps-manual .site-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.wadeps-manual .site-brand img {
+  width: min(600px, 50vw);
+  height: auto;
+  background: var(--wadeps-white);
+  border-radius: 0.5rem;
+}
+
+.wadeps-manual .site-brand__content {
+  min-width: 0;
+}
+
+.wadeps-manual .eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wadeps-manual .site-subtitle {
+  margin: 0.75rem 0 0;
+  max-width: 70ch;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ============================================================
+   7b. SITE FOOTER
+   ============================================================ */
+
+.wadeps-manual .site-footer {
+  background: var(--wadeps-green-dark);
+  color: var(--wadeps-white);
+  padding: 1.5rem 0;
+}
+
+.wadeps-manual .site-footer p {
+  margin: 0;
+  max-width: none;
+}
+
+.wadeps-manual .site-footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+
+/* ============================================================
+   8. TABLE OF CONTENTS
+   ============================================================ */
+
+/* Training TOC section — full-width background area */
+.wadeps-manual .training-toc {
+  background: var(--wadeps-surface);
+  border-bottom: 1px solid var(--wadeps-border);
+  padding: 2rem 0;
+}
+
+/* TOC grid — card-based chapter layout */
+.wadeps-manual .toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.wadeps-manual .toc-card {
+  background: var(--wadeps-white);
+  border: 1px solid var(--wadeps-border);
+  border-top: 6px solid var(--wadeps-green);
+  border-radius: var(--wadeps-radius);
+  box-shadow: var(--wadeps-shadow);
+  padding: 1.5rem;
+}
+
+.wadeps-manual .toc-card h2,
+.wadeps-manual .toc-card h3 {
+  margin-top: 0;
+}
+
+.wadeps-manual .toc-card h3 {
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.3rem);
+}
+
+.wadeps-manual .toc-card h3 a {
+  color: var(--wadeps-green-dark);
+  font-weight: 700;
+}
+
+.wadeps-manual .toc-card h3 a:hover {
+  color: var(--wadeps-link-hover);
+}
+
+.wadeps-manual .toc-card ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.wadeps-manual .toc-card li + li {
+  margin-top: 0.35rem;
+}
+
+.wadeps-manual .toc-card a {
+  color: var(--wadeps-text);
+}
+
+/* PDF page range badge in TOC cards */
+.wadeps-manual .toc-page-range {
+  display: inline-block;
+  color: var(--wadeps-muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
+}
+
+.wadeps-manual .toc-intro {
+  max-width: 72ch;
+  color: var(--wadeps-muted);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--wadeps-white);
+  border-left: 4px solid var(--wadeps-green);
+  border-radius: 0.5rem;
+}
+
+/* Legacy nested TOC style (if used in older markup) */
+.wadeps-manual .toc-list,
+.wadeps-manual .toc-sublist {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.wadeps-manual .toc-chapter {
+  border-top: 1px solid var(--wadeps-border);
+  padding-top: 1rem;
+  padding-bottom: 0.75rem;
+}
+
+.wadeps-manual .toc-chapter:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.wadeps-manual .toc-chapter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
+.wadeps-manual .toc-chapter-row > a {
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.3rem);
+  font-weight: 700;
+  color: var(--wadeps-green-dark);
+}
+
+.wadeps-manual .toc-chapter-row > a:hover {
+  color: var(--wadeps-link);
+}
+
+.wadeps-manual .toc-page {
+  color: var(--wadeps-muted);
+  font-size: 0.92rem;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.wadeps-manual .toc-sublist {
+  margin-top: 0.65rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--wadeps-surface-strong);
+}
+
+.wadeps-manual .toc-sublist li + li {
+  margin-top: 0.35rem;
+}
+
+.wadeps-manual .toc-sublist a {
+  display: inline-block;
+  color: var(--wadeps-text);
+}
+
+
+/* ============================================================
+   9. READING TOOLS (Text Size Adjuster)
+   ============================================================ */
+
+.wadeps-manual .reading-tools {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.wadeps-manual .reading-tools__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.5rem;
+  border: 1px solid var(--wadeps-border);
+  border-radius: 1rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  background: var(--wadeps-white);
+}
+
+.wadeps-manual .reading-tools__icon {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15em;
+  font-weight: 700;
+  color: var(--wadeps-green-dark);
+  line-height: 1;
+}
+
+.wadeps-manual .reading-tools__icon-sm {
+  font-size: 1.25rem;
+}
+
+.wadeps-manual .reading-tools__icon-lg {
+  font-size: 2rem;
+}
+
+.wadeps-manual .reading-tools__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.wadeps-manual .reading-tools__title {
+  margin: 0 0 0.75rem;
+  color: var(--wadeps-green-dark);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1.15;
+}
+
+.wadeps-manual .reading-tools__description {
+  max-width: 70ch;
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.wadeps-manual .reading-tools__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+
+.wadeps-manual .reading-tools__button {
+  min-height: 44px;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--wadeps-border);
+  border-radius: 999px;
+  background: var(--wadeps-white);
+  color: var(--wadeps-text);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: normal;
+}
+
+.wadeps-manual .reading-tools__button:hover {
+  border-color: var(--wadeps-green-dark);
+}
+
+.wadeps-manual .reading-tools__button.is-active,
+.wadeps-manual .reading-tools__button[aria-pressed="true"] {
+  background: var(--wadeps-green-dark);
+  color: var(--wadeps-white);
+  border-color: var(--wadeps-green-dark);
+}
+
+.wadeps-manual .reading-tools__check {
+  display: inline-block;
+  min-width: 1em;
+  margin-right: 0.25rem;
+}
+
+.wadeps-manual .reading-tools__help {
+  margin: 1rem 0 0;
+  color: var(--wadeps-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   10. CHAPTER CARDS AND SECTIONS
+   ============================================================ */
+
+.wadeps-manual .manual-cover {
+  display: grid;
+  gap: 2rem;
+  background: var(--wadeps-surface);
+  border: 1px solid var(--wadeps-border);
+  border-radius: var(--wadeps-radius);
+  padding: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.wadeps-manual .manual-cover__media,
+.wadeps-manual .manual-cover__content {
+  min-width: 0;
+}
+
+.wadeps-manual .manual-section {
+  margin-bottom: 3rem;
+}
+
+.wadeps-manual .manual-subsection {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.wadeps-manual .manual-chapter {
+  margin: 0 0 2rem;
+  padding: clamp(1.25rem, 1rem + 0.8vw, 2rem);
+  border: 1px solid var(--wadeps-border);
+  border-radius: var(--wadeps-radius);
+  background: linear-gradient(180deg, var(--wadeps-surface), var(--wadeps-white));
+  box-shadow: var(--wadeps-shadow);
+}
+
+.wadeps-manual .chapter-header {
+  margin-bottom: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.wadeps-manual .chapter-header h2 {
+  margin-bottom: 0.75rem;
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+}
+
+.wadeps-manual .chapter-summary {
+  max-width: 70ch;
+  margin: 0;
+  font-size: 1.02em;
+}
+
+.wadeps-manual .chapter-learning-box {
+  border: 1px solid var(--wadeps-border);
+  border-left: 6px solid var(--wadeps-green);
+  border-radius: calc(var(--wadeps-radius) - 0.2rem);
+  background: var(--wadeps-surface-alt);
+  padding: 1.5rem;
+}
+
+.wadeps-manual .chapter-learning-box h3 {
+  margin-top: 0;
+}
+
+.wadeps-manual .chapter-learning-box ul {
+  margin-bottom: 0;
+}
+
+/* Manual list utility */
+.wadeps-manual .manual-list {
+  padding-left: 1.25rem;
+  margin: 0 0 1.5rem;
+}
+
+.wadeps-manual .manual-list li + li {
+  margin-top: 0.45rem;
+}
+
+
+/* ============================================================
+   11. FIGURES AND SCREENSHOTS
+   ============================================================ */
+
+.wadeps-manual .manual-figure {
+  margin: 1.5rem 0;
+  border: 1px solid var(--wadeps-border);
+  border-radius: var(--wadeps-radius);
+  background: var(--wadeps-surface);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.wadeps-manual .manual-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wadeps-manual figcaption {
+  padding: 0.75rem 1rem;
+  color: var(--wadeps-text);
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.5;
+  border-top: 3px solid var(--wadeps-green);
+  background: var(--wadeps-surface-strong);
+}
+
+.wadeps-manual figcaption::before {
+  content: "Figure: ";
+  font-style: normal;
+  font-weight: 700;
+  color: var(--wadeps-green-dark);
+}
+
+
+/* ============================================================
+   12. CALLOUT PATTERN
+   ============================================================ */
+
+.wadeps-manual .wadeps-callout {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: rgba(31, 79, 58, 0.08);
+  border: none;
+  border-left: 6px solid var(--wadeps-green-dark);
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(31, 79, 58, 0.14);
+}
+
+.wadeps-manual .wadeps-callout__title {
+  margin: 0 0 0.5rem;
+  color: var(--wadeps-green-dark);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+
+.wadeps-manual .wadeps-callout p {
+  line-height: 1.6;
+}
+
+.wadeps-manual .wadeps-callout p:last-child,
+.wadeps-manual .wadeps-callout ul:last-child,
+.wadeps-manual .wadeps-callout ol:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ============================================================
+   13. DEFINITION CARDS
+   ============================================================ */
+
+.wadeps-manual .definition-group {
+  margin: 2rem 0;
+}
+
+.wadeps-manual .definition-card {
+  border-left: 6px solid var(--wadeps-green-dark);
+  background: var(--wadeps-surface);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.wadeps-manual .definition-card__term {
+  color: var(--wadeps-green-dark);
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.wadeps-manual .definition-card p {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.wadeps-manual .definition-card p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ============================================================
+   14. TABLES
+   ============================================================ */
+
+.wadeps-manual table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.wadeps-manual th {
+  color: var(--wadeps-green-dark);
+  font-weight: 700;
+  text-align: left;
+}
+
+.wadeps-manual th,
+.wadeps-manual td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--wadeps-border);
+  vertical-align: top;
+}
+
+.wadeps-manual tbody tr:nth-child(odd) {
+  background: var(--wadeps-surface-alt);
+}
+
+/* Responsive table wrapper */
+.wadeps-manual .table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.25rem 0;
+}
+
+
+/* ============================================================
+   15. STEP HEADINGS (Procedural Steps)
+   ============================================================ */
+
+.wadeps-manual .step-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--wadeps-green-dark);
+  margin: 1.5rem 0 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--wadeps-surface);
+  border-left: 4px solid var(--wadeps-green);
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.wadeps-manual .step-heading:first-of-type {
+  margin-top: 0;
+}
+
+.wadeps-manual .step-number {
+  color: var(--wadeps-green);
+  font-weight: 700;
+  margin-right: 0.25em;
+}
+
+
+/* ============================================================
+   16. WARNING CALLOUT
+   ============================================================ */
+
+.wadeps-manual .warning {
+  padding: 1rem;
+  background: var(--wadeps-warning-surface);
+  border-left: 4px solid #b35c1e;
+  border-radius: 0 0.25rem 0.25rem 0;
+  margin: 1rem 0;
+}
+
+
+/* ============================================================
+   17. COURSE METADATA
+   ============================================================ */
+
+.wadeps-manual .course-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 1rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--wadeps-surface);
+  border-radius: 0.5rem;
+}
+
+.wadeps-manual .course-meta dt {
+  font-weight: 700;
+  color: var(--wadeps-green-dark);
+}
+
+.wadeps-manual .course-meta dd {
+  margin: 0;
+}
+
+
+/* ============================================================
+   18. STAGES GRID (3-column on desktop)
+   ============================================================ */
+
+.wadeps-manual .stages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.wadeps-manual .stages-grid > section {
+  background: var(--wadeps-white);
+  padding: 1.5rem;
+  border-radius: var(--wadeps-radius);
+  border-top: 5px solid var(--wadeps-green-dark);
+  box-shadow: 0 4px 16px rgba(31, 37, 43, 0.1), 0 1px 4px rgba(31, 37, 43, 0.06);
+}
+
+.wadeps-manual .stages-grid > section > h3:first-child {
+  margin-top: 0;
+}
+
+
+/* ============================================================
+   19. BACK-TO-TOP BUTTON
+   ============================================================ */
+
+.wadeps-manual .back-to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.65rem 0.9rem;
+  border: 2px solid var(--wadeps-green-dark);
+  border-radius: 999px;
+  background: var(--wadeps-green-dark);
+  color: var(--wadeps-white);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.wadeps-manual .back-to-top.is-visible {
+  display: inline-flex;
+}
+
+.wadeps-manual .back-to-top:hover {
+  background: var(--wadeps-green);
+}
+
+.wadeps-manual .back-to-top-text {
+  line-height: 1;
+  font-size: 0.9rem;
+}
+
+
+/* ============================================================
+   20. SKIP LINK
+   ============================================================ */
+
+.wadeps-manual .skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  background: var(--wadeps-white);
+  color: var(--wadeps-text);
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--wadeps-text);
+  border-radius: 0.5rem;
+  z-index: 1000;
+}
+
+.wadeps-manual .skip-link:focus {
+  top: 0.5rem;
+}
+
+
+/* ============================================================
+   21. UTILITY CLASSES
+   ============================================================ */
+
+.wadeps-manual .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wadeps-manual .anchor-target {
+  display: block;
+  position: relative;
+  top: -0.5rem;
+  visibility: hidden;
+}
+
+/* Scroll margin for anchored elements */
+.wadeps-manual .manual-chapter,
+.wadeps-manual h2,
+.wadeps-manual h3 {
+  scroll-margin-top: 1.5rem;
+}
+
+/* Target highlight */
+.wadeps-manual .manual-chapter:target {
+  border-color: var(--wadeps-green);
+  box-shadow: 0 0 0 4px rgba(255, 191, 71, 0.35), var(--wadeps-shadow);
+}
+
+
+/* ============================================================
+   22. RESPONSIVE — TABLET & MOBILE
+   ============================================================ */
+
+@media (min-width: 900px) {
+  .wadeps-manual .manual-cover {
+    grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+    align-items: start;
+  }
+
+  .wadeps-manual .stages-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  .wadeps-manual .site-header__inner,
+  .wadeps-manual .site-footer__inner,
+  .wadeps-manual .site-brand {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .wadeps-manual .site-brand img {
+    width: min(220px, 60vw);
+  }
+
+  .wadeps-manual .toc-page,
+  .wadeps-manual .toc-page-range {
+    white-space: normal;
+  }
+
+  .wadeps-manual .toc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wadeps-manual .manual-chapter {
+    padding: 1rem;
+  }
+
+  .wadeps-manual .training-manual {
+    max-width: 100%;
+    padding-inline: 1rem;
+  }
+
+  .wadeps-manual p,
+  .wadeps-manual li {
+    max-width: 100%;
+  }
+
+  .wadeps-manual .reading-tools {
+    padding-inline: 1rem;
+  }
+
+  .wadeps-manual .reading-tools__inner {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .wadeps-manual .reading-tools__buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .wadeps-manual .reading-tools__button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .wadeps-manual .wadeps-callout {
+    padding: 0.875rem 1rem;
+    border-left-width: 5px;
+    box-shadow: 0 3px 10px rgba(31, 79, 58, 0.12);
+  }
+
+  .wadeps-manual .definition-card {
+    padding: 0.875rem 1rem;
+    border-left-width: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wadeps-manual .container {
+    width: min(100% - 1rem, var(--wadeps-container));
+  }
+
+  .wadeps-manual .back-to-top {
+    right: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    padding: 0.6rem 0.75rem;
+  }
+
+  .wadeps-manual .back-to-top-text {
+    font-size: 0.875rem;
+  }
+
+  .wadeps-manual .toc-card,
+  .wadeps-manual .manual-cover {
+    padding: 1rem;
+  }
+}
+
+
+/* ============================================================
+   23. REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .wadeps-manual,
+  .wadeps-manual * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ============================================================
+   24. WINDOWS HIGH CONTRAST MODE
+   ============================================================ */
+
+@media (forced-colors: active) {
+  .wadeps-manual .skip-link,
+  .wadeps-manual .back-to-top,
+  .wadeps-manual .reading-tools__button {
+    border: 2px solid ButtonText;
+  }
+
+  .wadeps-manual :focus-visible {
+    outline: 3px solid Highlight;
+  }
+
+  .wadeps-manual .chapter-learning-box,
+  .wadeps-manual .toc-card,
+  .wadeps-manual .manual-chapter {
+    border: 2px solid CanvasText;
+  }
+}
+
+
+/* ============================================================
+   25. PRINT STYLES
+   ============================================================ */
+
+@media print {
+  .wadeps-manual {
+    color: #000000;
+    background: #ffffff;
+    max-width: 100%;
+  }
+
+  .wadeps-manual .reading-tools,
+  .wadeps-manual .skip-link,
+  .wadeps-manual .back-to-top {
+    display: none !important;
+  }
+
+  .wadeps-manual .manual-chapter {
+    break-before: page;
+    box-shadow: none;
+    background: #ffffff;
+  }
+
+  .wadeps-manual .chapter-learning-box {
+    break-inside: avoid;
+  }
+
+  .wadeps-manual a {
+    color: #000000;
+  }
+
+  .wadeps-manual .toc-page {
+    color: #000000;
+  }
+}

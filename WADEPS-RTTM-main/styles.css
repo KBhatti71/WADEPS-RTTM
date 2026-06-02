@@ -79,6 +79,157 @@ body[data-text-size="extra-large"] {
   --line-height: 1.8;
 }
 
+/* Training manual content wrapper — text size scoped here only
+   1000px matches the TOC and reading tools width so the full page
+   aligns to one consistent visual grid. Text is capped at 75ch
+   for comfortable line length. */
+.training-manual {
+  --manual-font-scale: 1;
+  --manual-line-height: 1.65;
+  --manual-space-scale: 1;
+
+  width: min(100% - 2rem, 1000px);
+  margin-inline: auto;
+  font-size: calc(1rem * var(--manual-font-scale));
+  line-height: var(--manual-line-height);
+  overflow-wrap: break-word;
+}
+
+/* Readable line length for text — does not restrict full-width elements */
+.training-manual p,
+.training-manual li {
+  max-width: 75ch;
+}
+
+/* Full-width elements use all available space within the 900px wrapper */
+.training-manual table,
+.training-manual figure,
+.training-manual img,
+.training-manual .wadeps-callout,
+.training-manual .definition-card,
+.training-manual .toc-card,
+.training-manual .stages-grid,
+.training-manual .manual-cover {
+  max-width: 100%;
+}
+
+.training-manual img {
+  height: auto;
+}
+
+.training-manual table {
+  width: 100%;
+}
+
+.training-manual.text-size-default {
+  --manual-font-scale: 1;
+  --manual-line-height: 1.65;
+  --manual-space-scale: 1;
+}
+
+.training-manual.text-size-large {
+  --manual-font-scale: 1.125;
+  --manual-line-height: 1.7;
+  --manual-space-scale: 1.1;
+}
+
+.training-manual.text-size-xl {
+  --manual-font-scale: 1.25;
+  --manual-line-height: 1.75;
+  --manual-space-scale: 1.2;
+}
+
+/* Safe heading scaling within training manual */
+.training-manual h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  margin-block: calc(2rem * var(--manual-space-scale)) calc(1rem * var(--manual-space-scale));
+}
+
+.training-manual h2 {
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  line-height: 1.2;
+  margin-block: calc(1.75rem * var(--manual-space-scale)) calc(0.875rem * var(--manual-space-scale));
+}
+
+.training-manual h3 {
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  line-height: 1.25;
+  margin-block: calc(1.5rem * var(--manual-space-scale)) calc(0.75rem * var(--manual-space-scale));
+}
+
+.training-manual h4,
+.training-manual h5,
+.training-manual h6 {
+  font-size: clamp(1.125rem, 2.5vw, 1.4rem);
+  line-height: 1.3;
+  margin-block: calc(1.25rem * var(--manual-space-scale)) calc(0.625rem * var(--manual-space-scale));
+}
+
+/* Text spacing */
+.training-manual p,
+.training-manual ul,
+.training-manual ol,
+.training-manual figure,
+.training-manual table,
+.training-manual .wadeps-callout {
+  margin-block-end: calc(1.25rem * var(--manual-space-scale));
+}
+
+.training-manual p,
+.training-manual li {
+  font-size: 1em;
+  line-height: inherit;
+}
+
+.training-manual ul,
+.training-manual ol {
+  padding-inline-start: 1.5em;
+}
+
+.training-manual li + li {
+  margin-block-start: 0.35em;
+}
+
+/* Images and figures */
+.training-manual img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.training-manual figure {
+  max-width: 100%;
+  margin-inline: 0;
+}
+
+/* Callout spacing within manual */
+.training-manual .wadeps-callout {
+  width: 100%;
+  max-width: 100%;
+  padding: calc(1rem * var(--manual-space-scale));
+  margin-block: calc(1.5rem * var(--manual-space-scale));
+}
+
+/* Table scroll wrapper */
+.training-manual .table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-block: calc(1.25rem * var(--manual-space-scale));
+}
+
+/* Prevent accidental overflow */
+.training-manual * {
+  max-width: 100%;
+}
+
+/* Do not force tables to shrink beyond usability */
+.training-manual table,
+.training-manual table * {
+  max-width: none;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -182,145 +333,247 @@ summary:focus {
   color: rgba(255, 255, 255, 0.92);
 }
 
-.site-nav {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: var(--space-4) 0;
-}
+/* ============================================================
+   TRAINING TABLE OF CONTENTS — Card Grid Layout
+   ============================================================ */
 
-.toc-card {
+.training-toc {
+  width: min(100% - 2rem, 1000px);
+  margin: 1.5rem auto 2rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
   background: var(--white);
   border: 1px solid var(--border);
-  border-top: 6px solid var(--wadeps-green);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: var(--space-4);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(31, 37, 43, 0.08), 0 1px 4px rgba(31, 37, 43, 0.04);
 }
 
-.toc-card h2 {
-  margin-top: 0;
-}
-
-.toc-card ol,
-.toc-card ul {
-  margin: 0;
-  padding-left: 1.25rem;
-}
-
-.toc-card li + li {
-  margin-top: 0.35rem;
-}
-
-.toc-intro {
-  max-width: 72ch;
-  color: var(--muted);
-  margin-bottom: var(--space-3);
-  padding: var(--space-3);
-  background: var(--surface);
-  border-left: 4px solid var(--wadeps-green);
-  border-radius: 0.5rem;
-}
-
-.toc-list,
-.toc-sublist {
-  margin: 0;
-  padding-left: 1.25rem;
-}
-
-.toc-chapter {
-  border-top: 1px solid var(--border);
-  padding-top: var(--space-3);
-  padding-bottom: var(--space-2);
-}
-
-.toc-chapter:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
-.toc-chapter-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.5rem 1rem;
-}
-
-.toc-chapter-row > a {
-  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.3rem);
-  font-weight: 700;
+.training-toc h2 {
+  margin: 0 0 0.75rem;
   color: var(--wadeps-green-dark);
 }
 
-.toc-chapter-row > a:hover {
-  color: var(--link);
-}
-
-.toc-page {
+.toc-intro {
+  max-width: 70ch;
+  margin: 0 0 1.5rem;
   color: var(--muted);
-  font-size: 0.92rem;
-  white-space: nowrap;
-  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-.toc-sublist {
-  margin-top: 0.65rem;
-  padding-left: 1rem;
-  border-left: 3px solid var(--surface-strong);
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
 }
 
-.toc-sublist li + li {
-  margin-top: 0.35rem;
+@media (max-width: 760px) {
+  .toc-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.toc-sublist a {
+.toc-card {
+  background: rgba(31, 79, 58, 0.04);
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--wadeps-green-dark);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(31, 79, 58, 0.08);
+  height: 100%;
+  min-height: 11rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chapter 11 (last odd card) spans full width */
+.toc-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  min-height: auto;
+}
+
+.toc-card:last-child:nth-child(odd) ul {
+  max-width: 42rem;
+}
+
+.toc-card h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.toc-card h3 a {
+  color: var(--wadeps-green-dark);
+  text-decoration: none;
+}
+
+.toc-card h3 a:hover {
+  text-decoration: underline;
+}
+
+.toc-card h3 a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.toc-page-range {
   display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--wadeps-green-dark);
+  background: rgba(31, 79, 58, 0.08);
+  border-radius: 4px;
+  letter-spacing: 0.01em;
+}
+
+.toc-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+
+.toc-card li {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.toc-card li a {
   color: var(--text);
+  text-decoration: none;
+}
+
+.toc-card li a:hover {
+  color: var(--wadeps-green-dark);
+  text-decoration: underline;
+}
+
+.toc-card li a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .reading-tools {
-  padding: var(--space-4);
-  margin-bottom: var(--space-5);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  width: min(100% - 2rem, 1000px);
+  margin: 0 auto 2rem;
 }
 
-.reading-tools h2 {
-  margin-bottom: 0.5rem;
-}
-
-.text-size-controls {
+.reading-tools__inner {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  background: var(--white);
+  box-shadow: 0 2px 8px rgba(31, 37, 43, 0.06);
 }
 
-.text-size-controls button {
-  min-width: 44px;
-  min-height: 44px;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
+.reading-tools__icon {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  min-width: 3rem;
+  height: 3rem;
+  background: var(--wadeps-green-dark);
+  color: var(--white);
+  border-radius: 8px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.5rem;
+  flex-shrink: 0;
+}
+
+.reading-tools__icon-sm {
+  font-size: 1rem;
+  align-self: flex-end;
+}
+
+.reading-tools__icon-lg {
+  font-size: 1.6rem;
+}
+
+.reading-tools__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.reading-tools__title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--wadeps-green-dark);
+  line-height: 1.3;
+}
+
+.reading-tools__description {
+  margin: 0.15rem 0 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.reading-tools__buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.reading-tools__button {
+  min-height: 40px;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 6px;
   background: var(--white);
   color: var(--text);
   font: inherit;
+  font-size: 0.88rem;
   font-weight: 700;
+  line-height: 1.2;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
 }
 
-.text-size-controls button:hover {
-  border-color: var(--wadeps-green);
-  background: var(--surface);
-}
-
-.text-size-controls button[aria-pressed="true"] {
-  background: var(--wadeps-green-dark);
+.reading-tools__button:hover {
   border-color: var(--wadeps-green-dark);
+}
+
+.reading-tools__button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.reading-tools__button.is-active,
+.reading-tools__button[aria-pressed="true"] {
+  background: var(--wadeps-green-dark);
   color: var(--white);
+  border-color: var(--wadeps-green-dark);
+}
+
+.reading-tools__check {
+  display: inline-block;
+  min-width: 1em;
+  margin-right: 0.2rem;
+}
+
+@media (max-width: 760px) {
+  .reading-tools__inner {
+    flex-wrap: wrap;
+  }
+
+  .reading-tools__buttons {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .reading-tools__button {
+    flex: 1;
+    text-align: center;
+  }
 }
 
 .back-to-top {
@@ -678,12 +931,12 @@ ol {
 }
 
 p {
-  max-width: 72ch;
+  max-width: 75ch;
   margin-bottom: var(--space-3);
 }
 
 li {
-  max-width: 72ch;
+  max-width: 75ch;
 }
 
 .site-footer {
@@ -743,6 +996,17 @@ li {
 
   .manual-article {
     padding: var(--space-3);
+  }
+
+  /* On mobile, use full available width */
+  .training-manual {
+    width: 100%;
+    padding-inline: 1rem;
+  }
+
+  .training-manual p,
+  .training-manual li {
+    max-width: 100%;
   }
 }
 
@@ -894,24 +1158,37 @@ li {
 .wadeps-callout {
   margin: 1.5rem 0;
   padding: 1rem 1.25rem;
-  background: var(--white);
+  background: rgba(31, 79, 58, 0.08);
   border: none;
-  border-left: 8px solid var(--wadeps-green-dark);
-  border-radius: 0;
+  border-left: 6px solid var(--wadeps-green-dark);
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(31, 79, 58, 0.14);
 }
 
 .wadeps-callout__title {
   margin: 0 0 0.5rem;
-  color: var(--muted);
+  color: var(--wadeps-green-dark);
   font-weight: 700;
   font-size: 1.125rem;
   line-height: 1.3;
+}
+
+.wadeps-callout p {
+  line-height: 1.6;
 }
 
 .wadeps-callout p:last-child,
 .wadeps-callout ul:last-child,
 .wadeps-callout ol:last-child {
   margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .wadeps-callout {
+    padding: 0.875rem 1rem;
+    border-left-width: 5px;
+    box-shadow: 0 3px 10px rgba(31, 79, 58, 0.12);
+  }
 }
 
 /* ============================================================

@@ -416,6 +416,15 @@ Side-by-side callouts must stack on mobile.
   }
 }
 ```
+## Training Manual Layout Width
+
+The WADEPS Training Manual should use a centered content wrapper with a maximum width of 900px. This width is preferred because it gives the manual enough room for screenshots, callouts, tables, and table-of-contents content without making paragraph lines too long.
+
+Paragraphs and list text should be limited to approximately 75ch for readability. Visual elements such as screenshots, figures, tables, callouts, and TOC sections may use the full 900px wrapper width.
+
+Do not apply this width rule globally to the entire website unless confirmed. It should primarily apply to the training manual content area.
+
+```
 
 Do not force two-column callouts on mobile.
 
@@ -445,6 +454,16 @@ figcaption {
 Do not apply heavy decoration to screenshots.
 
 Do not crop screenshots in a way that removes instructional context.
+
+## Training Manual Layout Width
+
+The WADEPS Training Manual should use a centered content wrapper with a maximum width of 900px. This width is preferred because it gives the manual enough room for screenshots, callouts, tables, and table-of-contents content without making paragraph lines too long.
+
+Paragraphs and list text should be limited to approximately 75ch for readability. Visual elements such as screenshots, figures, tables, callouts, and TOC sections may use the full 900px wrapper width.
+
+Do not apply this width rule globally to the entire website unless confirmed. It should primarily apply to the training manual content area.
+
+
 
 ## Tables
 

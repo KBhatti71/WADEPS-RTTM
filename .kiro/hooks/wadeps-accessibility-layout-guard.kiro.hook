@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "name": "WADEPS Accessibility Layout Guard",
+  "description": "When CSS, HTML, or WordPress template files are edited, review the change for WADEPS training manual accessibility and responsive layout safety.\n\nCheck that:\n- Text-size controls still work.\n- The .training-manual wrapper remains scoped and does not affect the whole body.\n- Headings use semantic order and do not skip levels unnecessarily.\n- Buttons remain keyboard accessible.\n- aria-pressed is preserved on text-size buttons.\n- Focus states remain visible.\n- Images remain responsive.\n- Tables are wrapped in .table-scroll when needed.\n- Callouts keep only the dark green left border as the required visible emphasis.\n- No fixed heights are added to callouts, cards, or content areas.\n- Layout works at Default, Larger Text, Extra Large Text, and browser zoom up to 200%.\n- Training manual wording is not rewritten.\n\nIf an issue is found, explain the problem and suggest the smallest safe fix.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "**/*.html\n**/*.css\n**/*.js\n**/*.php\n**/*.tsx\n**/*.jsx\n**/*.md"
+  }
+}

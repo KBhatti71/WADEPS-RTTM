@@ -1,23 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
   const buttons = Array.from(document.querySelectorAll("[data-text-size]"));
   const backToTopButton = document.querySelector(".back-to-top");
-  const tocHeading = document.querySelector("#toc-heading");
-  const validSizes = new Set(["default", "large", "extra-large"]);
+  const tocHeading = document.querySelector("#training-toc-heading");
+  const manual = document.querySelector(".training-manual");
+  const validSizes = new Set(["default", "large", "xl"]);
   const savedSize = localStorage.getItem("manualTextSize");
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   function setTextSize(size) {
     const nextSize = validSizes.has(size) ? size : "default";
-    document.body.setAttribute("data-text-size", nextSize);
     localStorage.setItem("manualTextSize", nextSize);
 
+    // Update class on manual content wrapper
+    if (manual) {
+      manual.classList.remove("text-size-default", "text-size-large", "text-size-xl");
+      manual.classList.add("text-size-" + nextSize);
+    }
+
+    // Update buttons
     buttons.forEach((button) => {
       const isActive = button.getAttribute("data-text-size") === nextSize;
       button.setAttribute("aria-pressed", String(isActive));
+      button.classList.toggle("is-active", isActive);
+
+      // Update checkmark
+      const check = button.querySelector(".reading-tools__check");
+      if (check) {
+        check.textContent = isActive ? "\u2713" : "";
+      }
     });
 
-    // Announce the change to screen readers
-    announceToScreenReader(`Text size set to ${nextSize.replace("-", " ")}`);
+    announceToScreenReader("Text size set to " + nextSize.replace("xl", "extra large"));
   }
 
   // Create a live region for status announcements
@@ -30,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function announceToScreenReader(message) {
     liveRegion.textContent = "";
-    // Small delay ensures the screen reader picks up the change
     setTimeout(() => { liveRegion.textContent = message; }, 100);
   }
 
@@ -41,12 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function toggleBackToTopButton() {
-    if (!backToTopButton) {
-      return;
-    }
-
-    const shouldShow = window.scrollY > 400;
-    backToTopButton.classList.toggle("is-visible", shouldShow);
+    if (!backToTopButton) return;
+    backToTopButton.classList.toggle("is-visible", window.scrollY > 400);
   }
 
   if (backToTopButton) {
@@ -56,12 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
           behavior: prefersReducedMotion.matches ? "auto" : "smooth",
           block: "start"
         });
-        // Move focus to the TOC heading so screen readers announce the new position
         tocHeading.setAttribute("tabindex", "-1");
         tocHeading.focus({ preventScroll: true });
         return;
       }
-
       window.scrollTo({
         top: 0,
         behavior: prefersReducedMotion.matches ? "auto" : "smooth"
