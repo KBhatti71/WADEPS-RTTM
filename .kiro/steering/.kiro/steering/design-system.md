@@ -211,9 +211,9 @@ Navigation should preserve the manual’s hierarchy.
 
 Do not flatten nested subsections.
 
-## Callout design
+ ## Callout Design
 
-The manual uses callouts such as:
+The WADEPS Training Manual uses repeated callout blocks to highlight important supporting information. These callouts include, but are not limited to:
 
 * Troubleshooting Tip
 * Important
@@ -228,13 +228,119 @@ The manual uses callouts such as:
 * Status
 * Decision
 
-All callouts should use the same base style.
+All callouts must follow the same base visual style.
 
-The only required visible emphasis border should be the dark green border on the left side.
+### Required Callout Style
 
-Do not place a dark green border around all four sides.
+Each callout must:
 
-Do not rely on color alone to communicate the callout type. Preserve the visible text label.
+* Use a dark WADEPS green border on the left side only.
+* Not use a dark green border around all four sides.
+* Use a soft transparent green background fill.
+* Use a subtle drop shadow to separate the callout from the page background.
+* Preserve the visible callout label, such as “Important,” “Reminder,” or “Example.”
+* Use readable spacing, line height, and padding.
+* Maintain WCAG 2.2 AA color contrast.
+* Work responsively on mobile screens.
+* Keep the callout content visible by default.
+* Use semantic HTML that does not disrupt the heading hierarchy.
+
+### Accessibility Requirements
+
+Do not rely on color alone to communicate the callout type. The visible text label must remain present.
+
+Correct:
+
+```html
+<aside class="callout callout--important" aria-label="Important">
+  <p class="callout__title">Important</p>
+  <p>If an officer does not appear in the Add New User to Agency section, do not add the Upload New Users feature.</p>
+</aside>
+```
+
+Incorrect:
+
+```html
+<div class="important-box">
+  <p>If an officer does not appear...</p>
+</div>
+```
+
+The incorrect version relies on styling alone and does not preserve the visible label.
+
+### Visual Rules
+
+Use this base callout pattern:
+
+```css
+.callout {
+  border-left: 6px solid var(--wadeps-green-dark, #1f4f3a);
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  background: rgba(31, 79, 58, 0.08);
+  box-shadow: 0 4px 14px rgba(31, 79, 58, 0.14);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.callout__title {
+  font-weight: 700;
+  color: var(--wadeps-green-dark, #1f4f3a);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.callout p {
+  line-height: 1.6;
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .callout {
+    padding: 0.875rem 1rem;
+    border-left-width: 5px;
+    box-shadow: 0 3px 10px rgba(31, 79, 58, 0.12);
+  }
+}
+```
+
+Callout types may use different visible labels, but they should not require different border styles unless explicitly requested. The consistent left-border treatment should match the Training Manual’s existing visual language, while the transparent green background and subtle shadow should make the callouts easier to identify on the web page.
+
+
+### Visual Rules
+
+Use this base callout pattern:
+
+```css
+.callout {
+  border-left: 6px solid var(--wadeps-green-dark, #1f4f3a);
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  background: var(--wadeps-surface-light, #f7f7f4);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.callout__title {
+  font-weight: 700;
+  color: var(--wadeps-green-dark, #1f4f3a);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+```
+
+Callout types may use different labels, but they should not require different border styles unless explicitly requested. The consistent left-border treatment should match the Training Manual’s existing visual language.
+
 
 Recommended CSS:
 

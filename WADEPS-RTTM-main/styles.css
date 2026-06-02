@@ -1,19 +1,37 @@
 :root {
+  /* WADEPS greens */
   --wadeps-green: #1f4f3a;
-  --wadeps-green-dark: #163b2b;
+  --wadeps-green-dark: #1B5027;
+  --wadeps-green-muted: #2f6f4e;
+  --wadeps-green-light: #dcefe3;
+
+  /* Text */
   --text: #1f252b;
-  --muted: #4b5563;
-  --border: #d9ded8;
+  --muted: #555f5b;
+  --color-heading: #1B5027;
+
+  /* Surfaces */
+  --white: #ffffff;
   --surface: #f7f7f4;
-  --surface-alt: #f1f4f1;
+  --surface-alt: #f3f7f4;
   --surface-strong: #edf2ec;
   --info-surface: #eef5fb;
   --scenario-surface: #fff8e8;
   --warning-surface: #fcf2ec;
   --success-surface: #eef6ef;
-  --white: #ffffff;
-  --link: #1f4f3a;
-  --focus: #163b2b;
+
+  /* Borders */
+  --border: #cfd8d1;
+  --border-strong: #1B5027;
+
+  /* Links */
+  --link: #1B5027;
+  --link-hover: #12391c;
+
+  /* Focus */
+  --focus: #1f4f3a;
+
+  /* Layout */
   --shadow: 0 10px 30px rgba(31, 37, 43, 0.08);
   --radius: 0.75rem;
   --container: 1100px;
@@ -38,7 +56,7 @@ html {
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Montserrat, "Open Sans", Arial, Helvetica, sans-serif;
   font-size: var(--body-font-size);
   line-height: var(--line-height);
   color: var(--text);
@@ -786,6 +804,13 @@ li {
   html {
     scroll-behavior: auto;
   }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ============================================================
@@ -859,5 +884,72 @@ li {
   .toc-card,
   .manual-chapter {
     border: 2px solid CanvasText;
+  }
+}
+
+/* ============================================================
+   WADEPS CALLOUT PATTERN (per steering: design-system.md)
+   ============================================================ */
+
+.wadeps-callout {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: var(--white);
+  border: none;
+  border-left: 8px solid var(--wadeps-green-dark);
+  border-radius: 0;
+}
+
+.wadeps-callout__title {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+
+.wadeps-callout p:last-child,
+.wadeps-callout ul:last-child,
+.wadeps-callout ol:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   DEFINITION CARD PATTERN (per steering: design-system.md)
+   ============================================================ */
+
+.definition-group {
+  margin: 2rem 0;
+}
+
+.definition-card {
+  border-left: 6px solid var(--wadeps-green-dark);
+  background: var(--surface);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.definition-card__term {
+  color: var(--wadeps-green-dark);
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.definition-card p {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.definition-card p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .definition-card {
+    padding: 0.875rem 1rem;
+    border-left-width: 5px;
   }
 }
