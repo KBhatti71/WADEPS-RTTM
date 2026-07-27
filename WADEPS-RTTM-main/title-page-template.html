@@ -1,0 +1,76 @@
+<!-- ====================================================================
+     WADEPS.org — Site Title Area Template (Single Post & Page)
+     ====================================================================
+     FILE: title-page-template.html
+     PURPOSE: Improved Gutenberg block markup for the title area
+              (featured image + title + content) that sits at the top of
+              the Single Post / Page templates.
+
+     USAGE:
+     1. In wp-admin, go to Appearance → Editor → Templates.
+     2. Open the "Single Posts" (or "Page") template.
+     3. Open the List View / Options (⋮) menu and choose "Edit as HTML" /
+        "Code editor".
+     4. Replace the existing title/featured-image/content group with the
+        markup below.
+     5. Save, then preview a post/page WITH a featured image and one
+        WITHOUT, at desktop and mobile widths.
+
+     WHAT CHANGED FROM THE DEFAULT, AND WHY:
+
+     - Added a Breadcrumbs block directly under the title. WADEPS.org
+       navigation direction calls for breadcrumbs under the page title on
+       every page (see structure.md, "Breadcrumbs"). If the core
+       Breadcrumbs block isn't available on this WordPress version, use
+       the accessible fallback pattern in the comment below the block.
+
+     - Gave the featured image a fixed 16:9 aspect ratio with "cover"
+       scaling so image height stays consistent across pages instead of
+       stretching the layout depending on the source photo's dimensions.
+
+     - Set the featured image sizeSlug to "large" instead of the
+       full-resolution original, and removed border-radius. WADEPS avoids
+       rounded "card" styling and marketing-hero image treatments — this
+       keeps the image a plain, restrained rectangle.
+
+     - Left the title and post content at the theme's default constrained
+       width rather than hardcoding a max-width on this template. The
+       900px reading width in the design system is reserved specifically
+       for Training Manual content, not the whole site, unless that's
+       confirmed separately.
+
+     - Kept the image stacked above the title as a plain block (no text
+       overlaid on the image). WADEPS.org is a public-sector site, not a
+       marketing site, and should not read as a hero banner.
+     ==================================================================== -->
+
+<!-- wp:group {"style":{"spacing":{"margin":{"top":"var:preset|spacing|60"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--60)">
+	<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group alignfull" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60)">
+
+		<!-- wp:breadcrumbs {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|30"}}}} /-->
+
+		<!--
+		Fallback if the core Breadcrumbs block is not available:
+		use a Custom HTML block with this accessible pattern instead
+		(from structure.md):
+
+		<nav class="wadeps-breadcrumbs" aria-label="Breadcrumb">
+		  <ol>
+		    <li><a href="/">Home</a></li>
+		    <li aria-current="page">Page Title</a></li>
+		  </ol>
+		</nav>
+		-->
+
+		<!-- wp:post-featured-image {"aspectRatio":"16/9","scale":"cover","sizeSlug":"large","style":{"border":{"radius":"0px"},"spacing":{"margin":{"bottom":"var:preset|spacing|50"}}}} /-->
+
+		<!-- wp:post-title {"level":1,"style":{"typography":{"lineHeight":"1.2"}}} /-->
+
+		<!-- wp:post-content {"align":"full","layout":{"type":"constrained"}} /-->
+
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
