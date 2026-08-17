@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#140a1f">
+  <title>PurpleWave Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">PW</div>
+        <div>
+          <strong>PurpleWave Studio</strong>
+          <span>Untitled Project</span>
+        </div>
+      </div>
+
+      <section class="transport" aria-label="Transport controls">
+        <button id="stop" class="icon-button" type="button" aria-label="Stop">■</button>
+        <button id="play" class="play-button" type="button" aria-label="Play">▶</button>
+        <button id="record" class="icon-button record" type="button" aria-label="Arm recording">●</button>
+        <label class="number-control">BPM
+          <input id="bpm" type="number" min="50" max="220" value="128">
+        </label>
+        <label class="number-control">Swing
+          <input id="swing" type="number" min="0" max="70" value="0">
+        </label>
+      </section>
+
+      <div class="top-actions">
+        <button id="inspector-toggle" class="secondary-button" type="button" aria-expanded="true" aria-controls="inspector">Inspector</button>
+        <button id="collaborate" class="secondary-button" type="button">Collaborate</button>
+        <button id="export" class="gold-button" type="button">Export</button>
+      </div>
+    </header>
+
+    <div class="workspace-layout" id="workspace">
+      <aside class="sound-browser" id="sound-browser" aria-label="Sound library">
+        <div class="panel-heading"><span>Sound Library</span><button type="button" aria-label="Add sound">＋</button></div>
+        <nav>
+          <button class="library-item active" type="button"><span>◉</span><b>Drum Kits</b></button>
+          <button class="library-item" type="button"><span>≈</span><b>Bass</b></button>
+          <button class="library-item" type="button"><span>◇</span><b>Synths</b></button>
+          <button class="library-item" type="button"><span>♫</span><b>Loops</b></button>
+          <button class="library-item" type="button"><span>✦</span><b>Effects</b></button>
+          <button class="library-item" type="button"><span>⬆</span><b>Uploads</b></button>
+        </nav>
+      </aside>
+
+      <main class="studio">
+        <nav class="view-tabs" aria-label="Studio view">
+          <button type="button" data-view="arrange">Arrange</button>
+          <button type="button" data-view="beats" class="active" aria-current="true">Beats</button>
+          <button type="button" data-view="notes">Notes</button>
+          <button type="button" data-view="sample">Sample</button>
+          <button type="button" data-view="mix">Mix</button>
+          <button type="button" data-view="dj">DJ</button>
+        </nav>
+
+        <div data-view-panel="beats">
+          <section class="sequencer-panel" aria-labelledby="sequencer-title">
+            <div class="sequencer-heading">
+              <div>
+                <p class="eyebrow">Pattern 01</p>
+                <h1 id="sequencer-title">Royal Night Beat</h1>
+              </div>
+              <div class="pattern-actions">
+                <button id="save" class="secondary-button" type="button">Save</button>
+                <button id="load" class="secondary-button" type="button">Load</button>
+                <button id="clear" class="secondary-button" type="button">Clear</button>
+                <button id="randomize" class="gold-outline-button" type="button">Randomize</button>
+              </div>
+            </div>
+            <div id="sequencer" class="sequencer" role="group" aria-label="16-step drum sequencer"></div>
+          </section>
+        </div>
+
+        <div data-view-panel="arrange" hidden>
+          <section class="arrangement" aria-labelledby="arrangement-title">
+            <div class="section-heading">
+              <h2 id="arrangement-title">Arrangement Preview</h2>
+              <span>8 bars</span>
+            </div>
+            <div class="arrangement-grid">
+              <div class="track-label"><span>◆</span><div><b>Drums</b><small>Royal Kit</small></div></div>
+              <div class="clip purple">INTRO</div><div class="clip purple">VERSE</div><div class="clip gold">BUILD</div><div class="clip purple">DROP</div>
+              <div class="track-label"><span>●</span><div><b>808 Bass</b><small>Sub Monarch</small></div></div>
+              <div></div><div class="clip dark-purple">BASS A</div><div class="clip dark-purple">BASS B</div><div class="clip gold">BASS DROP</div>
+              <div class="track-label"><span>▲</span><div><b>Synth</b><small>Glass Crown</small></div></div>
+              <div class="clip pale-purple">CHORDS</div><div class="clip pale-purple">CHORDS</div><div class="clip gold">RISER</div><div class="clip pale-purple">LEAD</div>
+            </div>
+          </section>
+        </div>
+
+        <div data-view-panel="notes" hidden>
+          <div class="placeholder-panel">
+            <h2>Piano Roll — coming soon</h2>
+            <p>Melodic note editing and a synth instrument are planned for the next milestone. For now, sketch melodies using the Synths track in the Sound Library and the step sequencer.</p>
+          </div>
+        </div>
+
+        <div data-view-panel="sample" hidden>
+          <div class="placeholder-panel">
+            <h2>Sampler — coming soon</h2>
+            <p>Loading and chopping your own audio samples is planned for the next milestone.</p>
+          </div>
+        </div>
+
+        <div data-view-panel="dj" hidden>
+          <div class="placeholder-panel">
+            <h2>Two-Deck DJ Workspace — coming soon</h2>
+            <p>Beatmatching, crossfading, and cueing between two decks are planned for a future release.</p>
+          </div>
+        </div>
+      </main>
+
+      <aside class="inspector" id="inspector" aria-label="Track inspector">
+        <div class="panel-heading"><span>Inspector</span><button id="inspector-close" type="button" aria-label="Close inspector">×</button></div>
+        <div class="inspector-content">
+          <section class="control-card">
+            <p class="eyebrow">Selected Track</p>
+            <h2 id="selected-track">Kick</h2>
+            <label>Volume <output id="volume-output">80%</output>
+              <input id="volume" type="range" min="0" max="100" value="80">
+            </label>
+            <label>Pan <output id="pan-output">Center</output>
+              <input id="pan" type="range" min="-100" max="100" value="0">
+            </label>
+          </section>
+          <section class="control-card">
+            <p class="eyebrow">Effects Chain</p>
+            <button class="effect-chip" type="button" aria-pressed="true">EQ</button>
+            <button class="effect-chip" type="button" aria-pressed="false">Compressor</button>
+            <button class="effect-chip gold" type="button" aria-pressed="false">Gold Reverb</button>
+          </section>
+          <button id="ai-mix" class="gold-button full" type="button">AI Mix Suggestion</button>
+        </div>
+      </aside>
+    </div>
+
+    <section class="mixer-panel" id="mixer-panel" aria-label="Mixer">
+      <div class="mixer-tabs" role="tablist" aria-label="Mixer view">
+        <button id="tab-mixer" class="active" type="button" role="tab" aria-selected="true" aria-controls="panel-mixer" data-mixerview="mixer">Mixer</button>
+        <button id="tab-pianoroll" type="button" role="tab" aria-selected="false" aria-controls="panel-pianoroll" data-mixerview="pianoroll">Piano Roll</button>
+        <button id="tab-automation" type="button" role="tab" aria-selected="false" aria-controls="panel-automation" data-mixerview="automation">Automation</button>
+        <button id="tab-sampler" type="button" role="tab" aria-selected="false" aria-controls="panel-sampler" data-mixerview="sampler">Sampler</button>
+      </div>
+      <div id="panel-mixer" role="tabpanel" aria-labelledby="tab-mixer" data-mixer-panel="mixer">
+        <div id="mixer" class="mixer"></div>
+      </div>
+      <div id="panel-pianoroll" role="tabpanel" aria-labelledby="tab-pianoroll" data-mixer-panel="pianoroll" hidden>
+        <div class="placeholder-panel">Piano roll editing is coming in a future update.</div>
+      </div>
+      <div id="panel-automation" role="tabpanel" aria-labelledby="tab-automation" data-mixer-panel="automation" hidden>
+        <div class="placeholder-panel">Automation lanes are coming in a future update.</div>
+      </div>
+      <div id="panel-sampler" role="tabpanel" aria-labelledby="tab-sampler" data-mixer-panel="sampler" hidden>
+        <div class="placeholder-panel">The sampler is coming in a future update.</div>
+      </div>
+    </section>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button type="button" data-view="beats" class="active" aria-current="true">Create</button>
+      <button id="mobile-sounds" type="button" data-mobile-action="sounds" aria-expanded="false" aria-controls="sound-browser">Sounds</button>
+      <button id="mobile-play" type="button" data-mobile-action="play">Play</button>
+      <button type="button" data-view="mix">Mix</button>
+      <button id="mobile-more" type="button" data-mobile-action="more" aria-expanded="false" aria-controls="inspector">More</button>
+    </nav>
+  </div>
+  <div id="status" class="sr-only" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
